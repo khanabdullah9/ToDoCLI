@@ -55,13 +55,13 @@ namespace ToDoCLI
                             }
                         }
                     }
-                }   
+                }
+                PrintTable(AllRows);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                App.Debugger("exception", "ERROR", "ToDoCLI", "SelectAsterick", ex.Message);
             }
-            PrintTable(AllRows);
         }
 
         /*
@@ -71,10 +71,10 @@ namespace ToDoCLI
         public static void PrintTable(List<ToDoTable> AllRows) 
         {
             /*MAXIMUM LENGTHS OF COLUMNS*/
-            int colID = 0, TaskName = 0, TaskCategory= 0, CreatedAt = 0, FinishedAt = 0, Completed = 0;
+            int colID = AllRows.ElementAt(0).ID.Length, TaskName = AllRows.ElementAt(0).TaskName.Length, TaskCategory= AllRows.ElementAt(0).TaskCategory.Length, CreatedAt = AllRows.ElementAt(0).CreatedAt.Length, FinishedAt = AllRows.ElementAt(0).FinishedAt.Length, Completed = AllRows.ElementAt(0).Completed.Length;
             for (int i=0;i<AllRows.Count;++i) 
             {
-                ToDoTable toDoTable = AllRows[i];
+                ToDoTable toDoTable = AllRows.ElementAt(i);
                 if (colID < toDoTable.ID.Length) { colID = toDoTable.ID.Length; }
                 if (TaskName < toDoTable.TaskName.Length) { TaskName = toDoTable.TaskName.Length; }
                 if (TaskCategory < toDoTable.TaskCategory.Length) { TaskCategory = toDoTable.TaskCategory.Length; }
@@ -85,68 +85,69 @@ namespace ToDoCLI
             //Print the header
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("ID");
-            for (int id=1;id<=colID-"ID".Length;++id) 
+            for (int id=1;id<=(colID - "ID".Length)+3;++id) 
             {
                 Console.Write(" ");
             }
             Console.Write("Task Name");
-            for (int tn = 1; tn <= colID - "Task Name".Length; ++tn)
+            for (int tn = 1; tn <= (TaskName - "Task Name".Length)+3; ++tn)
             {
                 Console.Write(" ");
             }
             Console.Write("Task Category");
-            for (int tc = 1; tc <= colID - "Task Category".Length; ++tc)
+            for (int tc = 1; tc <= (TaskCategory - "Task Category".Length)+3; ++tc)
             {
                 Console.Write(" ");
             }
             Console.Write("Created At");
-            for (int ca = 1; ca <= colID - "Created At".Length; ++ca)
+            for (int ca = 1; ca <= (CreatedAt - "Created At".Length)+3; ++ca)
             {
                 Console.Write(" ");
             }
             Console.Write("Finished At");
-            for (int fa = 1; fa <= colID - "Finished At".Length; ++fa)
+            for (int fa = 1; fa <= (FinishedAt - "Finished At".Length)+3; ++fa)
             {
                 Console.Write(" ");
             }
             Console.Write("Completed");
-            for (int co = 1; co <= colID - "Completed".Length; ++co)
+            for (int co = 1; co <= (Completed - "Completed".Length)+3; ++co)
             {
                 Console.Write(" ");
             }
             Console.WriteLine(" ");
             Console.WriteLine(" ");//Move to next line
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Green;
             //Print the content row by row
+            /*(Length of the longest string - the content string length) + 3 for extra spacing*/
             foreach (var row in AllRows) 
             {
-                Console.WriteLine(row.ID);
-                for (int id = 1; id <= colID - "ID".Length; ++id)
+                Console.Write(row.ID);
+                for (int id = 1; id <= (colID-row.ID.Length) + 3; ++id)
                 {
                     Console.Write(" ");
                 }
-                Console.WriteLine(row.TaskName);
-                for (int tn = 1; tn <= colID - "Task Name".Length; ++tn)
+                Console.Write(row.TaskName);
+                for (int tn = 1; tn <= (TaskName - row.TaskName.Length)+3; ++tn)
                 {
                     Console.Write(" ");
                 }
-                Console.WriteLine(row.TaskCategory);
-                for (int tc = 1; tc <= colID - "Task Category".Length; ++tc)
+                Console.Write(row.TaskCategory);
+                for (int tc = 1; tc <= (TaskCategory - row.TaskCategory.Length)+3; ++tc)
                 {
                     Console.Write(" ");
                 }
-                Console.WriteLine(row.CreatedAt);
-                for (int ca = 1; ca <= colID - "Created At".Length; ++ca)
+                Console.Write(row.CreatedAt);
+                for (int ca = 1; ca <= (CreatedAt - row.CreatedAt.Length)+3; ++ca)
                 {
                     Console.Write(" ");
                 }
-                Console.WriteLine(row.FinishedAt);
-                for (int fa = 1; fa <= colID - "Finished At".Length; ++fa)
+                Console.Write(row.FinishedAt);
+                for (int fa = 1; fa <= (FinishedAt - row.FinishedAt.Length)+3; ++fa)
                 {
                     Console.Write(" ");
                 }
-                Console.WriteLine(row.Completed);
-                for (int co = 1; co <= colID - "Completed".Length; ++co)
+                Console.Write(row.Completed);
+                for (int co = 1; co <= (Completed - row.Completed.Length)+3; ++co)
                 {
                     Console.Write(" ");
                 }
@@ -164,25 +165,24 @@ namespace ToDoCLI
         {
             try 
             {
-                using (SqlConnection con = new SqlConnection(_strcon)) 
+                using (SqlConnection con = new SqlConnection(_strcon))
                 {
                     if (con.State == ConnectionState.Closed)
                     {
                         con.Open();
                     }
-                    string ID = Guid.NewGuid().ToString();
                     DateTime CreatedAt = DateTime.Now;
-                    DateTime FinishedAt = new DateTime(0,0,0,0,0,0);
-                    using (SqlCommand cmd = new SqlCommand($"insert into {_tableName} values ({ID},{TaskName},{TaskCategory},{CreatedAt},{FinishedAt},0)",con)) 
+                    using (SqlCommand cmd = new SqlCommand($"insert into {_tableName} values ('{TaskName}','{TaskCategory}','{CreatedAt.ToString()}','PENDING',0)", con))
                     {
                         cmd.ExecuteNonQuery();
-                        App.Debugger("success","SUCCESS","ToDoCLI","CreateNewTask",$"New task '{TaskName}' created successfully!");
+                        ToDoCLI.SelectAsterick();
+                        //App.Debugger("success", "SUCCESS", "ToDoCLI", "CreateNewTask", $"New task '{TaskName}' created successfully!");
                     }
                 }
             }
             catch (Exception ex) 
             {
-                Console.WriteLine(ex.Message);
+                App.Debugger("exception","ERROR","ToDoCLI","CreateNewTask",ex.Message);
             }
         }
 
@@ -205,13 +205,14 @@ namespace ToDoCLI
                     using (SqlCommand cmd = new SqlCommand($"delete from {_tableName} where ID={TaskId}", con))
                     {
                         cmd.ExecuteNonQuery();
-                        App.Debugger("success", "SUCCESS", "ToDoCLI", "DeleteTask", $"TaskId: {TaskId} has been deleted successfully!");
+                        ToDoCLI.SelectAsterick();
+                        //App.Debugger("success", "SUCCESS", "ToDoCLI", "DeleteTask", $"TaskId: {TaskId} has been deleted successfully!");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                App.Debugger("exception", "ERROR", "ToDoCLI", "DeleteTask", ex.Message);
             }
         }
 
@@ -235,13 +236,80 @@ namespace ToDoCLI
                     using (SqlCommand cmd = new SqlCommand($"update {_tableName} set completed=1, FinishedAt='{currentTime}' where Id='{TaskId}'", con))
                     {
                         cmd.ExecuteNonQuery();
-                        App.Debugger("success", "SUCCESS", "ToDoCLI", "SetTaskCompleted", $"TaskId: {TaskId} has been updated successfully!");
+                        ToDoCLI.SelectAsterick();
+                        //App.Debugger("success", "SUCCESS", "ToDoCLI", "SetTaskCompleted", $"TaskId: {TaskId} has been updated successfully!");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                App.Debugger("exception", "ERROR", "ToDoCLI", "SetTaskCompleted", ex.Message);
+            }
+        }
+
+        /*Show all task categories from the database*/
+        public static void ShowAllCategories() 
+        {
+            try 
+            {
+                using (SqlConnection con = new SqlConnection(_strcon))
+                {
+                    if (con.State == ConnectionState.Closed) 
+                    {
+                        con.Open();
+                    }
+                    using (SqlCommand cmd = new SqlCommand($"select TaskCategory from {_tableName}",con))
+                    {
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine("Task Category/ies");
+                        if (dr.HasRows) 
+                        {
+                            while (dr.Read()) 
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine(dr["TaskCategory"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) 
+            {
+                App.Debugger("exception","ERROR","ToDoCLI","ShowAllCategories",ex.Message);
+            }
+        }
+
+        /*Show all task categories from the database*/
+        public static void ShowAllPendingTasks()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(_strcon))
+                {
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+                    using (SqlCommand cmd = new SqlCommand($"select TaskName from {_tableName} where FinishedAt='PENDING' ", con))
+                    {
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine("Pending task/s");
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine(dr["TaskName"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                App.Debugger("exception", "ERROR", "ToDoCLI", "ShowAllPendingTasks", ex.Message);
             }
         }
     }
