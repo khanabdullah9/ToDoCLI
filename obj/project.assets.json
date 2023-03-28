@@ -702,17 +702,21 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Abdullah Khan\\.nuget\\packages\\": {}
+    "C:\\Users\\Abdullah Khan\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Abdullah Khan\\source\\repos\\ToDoCLI\\ToDoCLI\\ToDoCLI.csproj",
+      "projectUniqueName": "E:\\ToDoCLI\\ToDoCLI\\ToDoCLI.csproj",
       "projectName": "ToDoCLI",
-      "projectPath": "C:\\Users\\Abdullah Khan\\source\\repos\\ToDoCLI\\ToDoCLI\\ToDoCLI.csproj",
+      "projectPath": "E:\\ToDoCLI\\ToDoCLI\\ToDoCLI.csproj",
       "packagesPath": "C:\\Users\\Abdullah Khan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Abdullah Khan\\source\\repos\\ToDoCLI\\ToDoCLI\\obj\\",
+      "outputPath": "E:\\ToDoCLI\\ToDoCLI\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
         "C:\\Users\\Abdullah Khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"

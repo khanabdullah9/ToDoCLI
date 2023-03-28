@@ -32,3 +32,37 @@ C:\Users\Abdullah Khan\source\repos\ToDoCLI\ToDoCLI\bin\Debug\net6.0\runtimes\wi
 C:\Users\Abdullah Khan\source\repos\ToDoCLI\ToDoCLI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Abdullah Khan\source\repos\ToDoCLI\ToDoCLI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\Abdullah Khan\source\repos\ToDoCLI\ToDoCLI\obj\Debug\net6.0\ToDoCLI.csproj.CopyComplete
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\ToDoCLI.exe
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\ToDoCLI.dll.config
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\ToDoCLI.deps.json
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\ToDoCLI.runtimeconfig.json
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\ToDoCLI.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\ToDoCLI.pdb
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\System.Data.SqlClient.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\System.Drawing.Common.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\System.Security.Permissions.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\System.Windows.Extensions.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+E:\ToDoCLI\ToDoCLI\obj\Debug\net6.0\ToDoCLI.csproj.AssemblyReference.cache
+E:\ToDoCLI\ToDoCLI\obj\Debug\net6.0\ToDoCLI.GeneratedMSBuildEditorConfig.editorconfig
+E:\ToDoCLI\ToDoCLI\obj\Debug\net6.0\ToDoCLI.AssemblyInfoInputs.cache
+E:\ToDoCLI\ToDoCLI\obj\Debug\net6.0\ToDoCLI.AssemblyInfo.cs
+E:\ToDoCLI\ToDoCLI\obj\Debug\net6.0\ToDoCLI.csproj.CoreCompileInputs.cache
+E:\ToDoCLI\ToDoCLI\obj\Debug\net6.0\ToDoCLI.csproj.CopyComplete
+E:\ToDoCLI\ToDoCLI\obj\Debug\net6.0\ToDoCLI.dll
+E:\ToDoCLI\ToDoCLI\obj\Debug\net6.0\refint\ToDoCLI.dll
+E:\ToDoCLI\ToDoCLI\obj\Debug\net6.0\ToDoCLI.pdb
+E:\ToDoCLI\ToDoCLI\obj\Debug\net6.0\ToDoCLI.genruntimeconfig.cache
+E:\ToDoCLI\ToDoCLI\obj\Debug\net6.0\ref\ToDoCLI.dll

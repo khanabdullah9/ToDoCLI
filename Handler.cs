@@ -12,7 +12,7 @@ namespace ToDoCLI
         {
             try
             {
-                ToDoCLI.SelectAsterick();
+                ToDoCLI.SelectAll();
             }
             catch (Exception ex)
             {
@@ -20,11 +20,11 @@ namespace ToDoCLI
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
-        public static void Two(string TaskName, string TaskCategory)
+        public static void Two(string TaskName)
         {
             try
             {
-                ToDoCLI.CreateNewTask(TaskName, TaskCategory);
+                ToDoCLI.CreateNewTask(TaskName);
             }
             catch (Exception ex)
             {
@@ -41,44 +41,6 @@ namespace ToDoCLI
             catch (Exception ex)
             {
                 App.Debugger("exception", "ERROR", "Handler", "Three", ex.Message);
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-        }
-
-        public static void Four(string ID)
-        {
-            try
-            {
-                ToDoCLI.SetTaskCompleted(ID);
-            }
-            catch (Exception ex)
-            {
-                App.Debugger("exception", "ERROR", "Handler", "Four", ex.Message);
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-        }
-        public static void Five() 
-        {
-            try
-            {
-                ToDoCLI.ShowAllCategories();
-            }
-            catch (Exception ex) 
-            {
-                App.Debugger("exception", "ERROR", "Handler", "Five", ex.Message);
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-        }
-
-        public static void Six()
-        {
-            try
-            {
-                ToDoCLI.ShowAllPendingTasks();
-            }
-            catch (Exception ex)
-            {
-                App.Debugger("exception", "ERROR", "Handler", "Six", ex.Message);
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }

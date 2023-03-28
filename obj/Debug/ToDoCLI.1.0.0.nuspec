@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>ToDoCLI</id>
+    <version>1.0.0</version>
+    <authors>ToDoCLI</authors>
+    <description>Package Description</description>
+    <packageTypes>
+      <packageType name="DotnetTool" />
+    </packageTypes>
+  </metadata>
+  <files>
+    <file src="E:\ToDoCLI\ToDoCLI\obj\DotnetToolSettings.xml" target="tools\net6.0\any\DotnetToolSettings.xml" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\ToDoCLI.dll" target="tools\net6.0\any\ToDoCLI.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\ToDoCLI.deps.json" target="tools\net6.0\any\ToDoCLI.deps.json" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\ToDoCLI.runtimeconfig.json" target="tools\net6.0\any\ToDoCLI.runtimeconfig.json" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\ToDoCLI.dll.config" target="tools\net6.0\any\ToDoCLI.dll.config" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\ToDoCLI.pdb" target="tools\net6.0\any\ToDoCLI.pdb" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\Microsoft.Win32.SystemEvents.dll" target="tools\net6.0\any\Microsoft.Win32.SystemEvents.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\System.Configuration.ConfigurationManager.dll" target="tools\net6.0\any\System.Configuration.ConfigurationManager.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\System.Data.SqlClient.dll" target="tools\net6.0\any\System.Data.SqlClient.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\System.Drawing.Common.dll" target="tools\net6.0\any\System.Drawing.Common.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\System.Security.Cryptography.ProtectedData.dll" target="tools\net6.0\any\System.Security.Cryptography.ProtectedData.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\System.Security.Permissions.dll" target="tools\net6.0\any\System.Security.Permissions.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\System.Windows.Extensions.dll" target="tools\net6.0\any\System.Windows.Extensions.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll" target="tools\net6.0\any\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\runtimes\win\lib\net6.0\System.Drawing.Common.dll" target="tools\net6.0\any\runtimes\win\lib\net6.0\System.Drawing.Common.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll" target="tools\net6.0\any\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\runtimes\win\lib\net6.0\System.Windows.Extensions.dll" target="tools\net6.0\any\runtimes\win\lib\net6.0\System.Windows.Extensions.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\runtimes\win-arm64\native\sni.dll" target="tools\net6.0\any\runtimes\win-arm64\native\sni.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\runtimes\win-x64\native\sni.dll" target="tools\net6.0\any\runtimes\win-x64\native\sni.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\runtimes\win-x86\native\sni.dll" target="tools\net6.0\any\runtimes\win-x86\native\sni.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll" target="tools\net6.0\any\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll" target="tools\net6.0\any\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll" />
+    <file src="E:\ToDoCLI\ToDoCLI\bin\Debug\net6.0\publish\runtimes\unix\lib\net6.0\System.Drawing.Common.dll" target="tools\net6.0\any\runtimes\unix\lib\net6.0\System.Drawing.Common.dll" />
+  </files>
+</package>

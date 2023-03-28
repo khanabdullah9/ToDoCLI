@@ -12,13 +12,15 @@ namespace ToDoCLI
     internal class ToDoCLI
     {
         private static string _strcon = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
-        private static string _tableName = "ToDo";
+        private static string _tableName = "Task";
+        private static string _procName = "spCreateTask";
 
-        /*
-         * Select all rows from table
-         * returns -> List object of ToDoTable class that represents the database table
-         */
-        public static void SelectAsterick() 
+        /// <summary>
+        /// Select all rows from table
+        /// <para></para>
+        /// <return>void</return>
+        /// </summary>
+        public static void SelectAll() 
         {
             List<ToDoTable> AllRows = new List<ToDoTable>();
             try
@@ -29,7 +31,7 @@ namespace ToDoCLI
                     {
                         con.Open();
                     }
-                    using (SqlCommand cmd = new SqlCommand($"select * from {_tableName}",con)) 
+                    using (SqlCommand cmd = new SqlCommand($"select * from {_tableName}", con))
                     {
                         SqlDataReader dr = cmd.ExecuteReader();
                         if (dr.HasRows)
@@ -38,25 +40,23 @@ namespace ToDoCLI
                             {
                                 string ID = dr["ID"].ToString();
                                 string TaskName = dr["TaskName"].ToString();
-                                string TaskCategory = dr["TaskCategory"].ToString();
                                 string CreatedAt = dr["CreatedAt"].ToString();
-                                string FinishedAt = dr["FinishedAt"].ToString();
-                                string Completed = dr["Completed"].ToString();
                                 ToDoTable toDoTable = new ToDoTable()
                                 {
                                     ID = ID,
                                     TaskName = TaskName,
-                                    TaskCategory = TaskCategory,
                                     CreatedAt = CreatedAt,
-                                    FinishedAt = FinishedAt,
-                                    Completed = Completed,
                                 };
                                 AllRows.Add(toDoTable);
                             }
+                            PrintTable(AllRows);
+                        }
+                        else 
+                        {
+                            App.Debugger("warning","TEST","TodoCLI","SelectAsterick","No tasks left");
                         }
                     }
                 }
-                PrintTable(AllRows);
             }
             catch (Exception ex)
             {
@@ -64,23 +64,23 @@ namespace ToDoCLI
             }
         }
 
-        /*
-         * Print all the rows
-         * params -> List of of all the db rows
-         */
+        /// <summary>
+        /// Print all the rows
+        /// <para value="AllRows">List of all the db rows</para>
+        /// <return>void</return>
+        /// </summary>
         public static void PrintTable(List<ToDoTable> AllRows) 
         {
             /*MAXIMUM LENGTHS OF COLUMNS*/
-            int colID = AllRows.ElementAt(0).ID.Length, TaskName = AllRows.ElementAt(0).TaskName.Length, TaskCategory= AllRows.ElementAt(0).TaskCategory.Length, CreatedAt = AllRows.ElementAt(0).CreatedAt.Length, FinishedAt = AllRows.ElementAt(0).FinishedAt.Length, Completed = AllRows.ElementAt(0).Completed.Length;
-            for (int i=0;i<AllRows.Count;++i) 
+            int colID = AllRows.ElementAt(0).ID.Length; 
+            int TaskName = AllRows.ElementAt(0).TaskName.Length; 
+            int CreatedAt = AllRows.ElementAt(0).CreatedAt.Length;
+            for (int i=0;i<AllRows.Count;i++) 
             {
                 ToDoTable toDoTable = AllRows.ElementAt(i);
                 if (colID < toDoTable.ID.Length) { colID = toDoTable.ID.Length; }
                 if (TaskName < toDoTable.TaskName.Length) { TaskName = toDoTable.TaskName.Length; }
-                if (TaskCategory < toDoTable.TaskCategory.Length) { TaskCategory = toDoTable.TaskCategory.Length; }
                 if (CreatedAt < toDoTable.CreatedAt.Length) { CreatedAt = toDoTable.CreatedAt.Length; }
-                if (FinishedAt < toDoTable.FinishedAt.Length) { FinishedAt = toDoTable.FinishedAt.Length; }
-                if (Completed < toDoTable.Completed.Length) { Completed = toDoTable.Completed.Length; }
             }
             //Print the header
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -94,23 +94,8 @@ namespace ToDoCLI
             {
                 Console.Write(" ");
             }
-            Console.Write("Task Category");
-            for (int tc = 1; tc <= (TaskCategory - "Task Category".Length)+3; ++tc)
-            {
-                Console.Write(" ");
-            }
             Console.Write("Created At");
             for (int ca = 1; ca <= (CreatedAt - "Created At".Length)+3; ++ca)
-            {
-                Console.Write(" ");
-            }
-            Console.Write("Finished At");
-            for (int fa = 1; fa <= (FinishedAt - "Finished At".Length)+3; ++fa)
-            {
-                Console.Write(" ");
-            }
-            Console.Write("Completed");
-            for (int co = 1; co <= (Completed - "Completed".Length)+3; ++co)
             {
                 Console.Write(" ");
             }
@@ -131,37 +116,25 @@ namespace ToDoCLI
                 {
                     Console.Write(" ");
                 }
-                Console.Write(row.TaskCategory);
-                for (int tc = 1; tc <= (TaskCategory - row.TaskCategory.Length)+3; ++tc)
-                {
-                    Console.Write(" ");
-                }
+                
                 Console.Write(row.CreatedAt);
                 for (int ca = 1; ca <= (CreatedAt - row.CreatedAt.Length)+3; ++ca)
                 {
                     Console.Write(" ");
                 }
-                Console.Write(row.FinishedAt);
-                for (int fa = 1; fa <= (FinishedAt - row.FinishedAt.Length)+3; ++fa)
-                {
-                    Console.Write(" ");
-                }
-                Console.Write(row.Completed);
-                for (int co = 1; co <= (Completed - row.Completed.Length)+3; ++co)
-                {
-                    Console.Write(" ");
-                }
+                
+                
                 Console.WriteLine(" ");
                 Console.WriteLine(" ");
             }
         }
-        /*
-         * Creates new task in the database
-         * params -> TaskName: Name of the task
-         * TaskCategory: Category of the task
-         * returns -> void
-         */
-        public static void CreateNewTask(string TaskName, string TaskCategory) 
+        /// <summary>
+        /// Creates new task in the database
+        /// <para value="TaskName">Name of the task</para>
+        /// <return>void</return>
+        /// </summary>
+        /// <param name="TaskName"></param>
+        public static void CreateNewTask(string TaskName) 
         {
             try 
             {
@@ -172,11 +145,10 @@ namespace ToDoCLI
                         con.Open();
                     }
                     DateTime CreatedAt = DateTime.Now;
-                    using (SqlCommand cmd = new SqlCommand($"insert into {_tableName} values ('{TaskName}','{TaskCategory}','{CreatedAt.ToString()}','PENDING',0)", con))
+                    using (SqlCommand cmd = new SqlCommand($"EXEC {_procName} '{TaskName}','{CreatedAt.ToString("dd-MM-yy")}'", con))
                     {
                         cmd.ExecuteNonQuery();
-                        ToDoCLI.SelectAsterick();
-                        //App.Debugger("success", "SUCCESS", "ToDoCLI", "CreateNewTask", $"New task '{TaskName}' created successfully!");
+                        ToDoCLI.SelectAll();
                     }
                 }
             }
@@ -186,11 +158,13 @@ namespace ToDoCLI
             }
         }
 
-        /*
-         * Delete existing task
-         * params -> TaskId: Id of the task
-         * returns -> void
-         */
+
+        /// <summary>
+        /// Delete a tasj
+        /// <para value="TaskId">Id of the task</para>
+        /// <return>void</return>
+        /// </summary>
+        /// <param name="TaskId"></param>
         public static void DeleteTask(string TaskId)
         {
             try
@@ -205,111 +179,13 @@ namespace ToDoCLI
                     using (SqlCommand cmd = new SqlCommand($"delete from {_tableName} where ID={TaskId}", con))
                     {
                         cmd.ExecuteNonQuery();
-                        ToDoCLI.SelectAsterick();
-                        //App.Debugger("success", "SUCCESS", "ToDoCLI", "DeleteTask", $"TaskId: {TaskId} has been deleted successfully!");
+                        ToDoCLI.SelectAll();
                     }
                 }
             }
             catch (Exception ex)
             {
                 App.Debugger("exception", "ERROR", "ToDoCLI", "DeleteTask", ex.Message);
-            }
-        }
-
-        /*
-         * Set the completed value true in the db
-         * params -> TaskId: Id of the task
-         * returns -> void
-         */
-        public static void SetTaskCompleted(string TaskId)
-        {
-            try
-            {
-                using (SqlConnection con = new SqlConnection(_strcon))
-                {
-                    if (con.State == ConnectionState.Closed)
-                    {
-                        con.Open();
-                    }
-                    string ID = Guid.NewGuid().ToString();
-                    DateTime currentTime = DateTime.Now;
-                    using (SqlCommand cmd = new SqlCommand($"update {_tableName} set completed=1, FinishedAt='{currentTime}' where Id='{TaskId}'", con))
-                    {
-                        cmd.ExecuteNonQuery();
-                        ToDoCLI.SelectAsterick();
-                        //App.Debugger("success", "SUCCESS", "ToDoCLI", "SetTaskCompleted", $"TaskId: {TaskId} has been updated successfully!");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                App.Debugger("exception", "ERROR", "ToDoCLI", "SetTaskCompleted", ex.Message);
-            }
-        }
-
-        /*Show all task categories from the database*/
-        public static void ShowAllCategories() 
-        {
-            try 
-            {
-                using (SqlConnection con = new SqlConnection(_strcon))
-                {
-                    if (con.State == ConnectionState.Closed) 
-                    {
-                        con.Open();
-                    }
-                    using (SqlCommand cmd = new SqlCommand($"select TaskCategory from {_tableName}",con))
-                    {
-                        SqlDataReader dr = cmd.ExecuteReader();
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.WriteLine("Task Category/ies");
-                        if (dr.HasRows) 
-                        {
-                            while (dr.Read()) 
-                            {
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.WriteLine(dr["TaskCategory"].ToString());
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex) 
-            {
-                App.Debugger("exception","ERROR","ToDoCLI","ShowAllCategories",ex.Message);
-            }
-        }
-
-        /*Show all task categories from the database*/
-        public static void ShowAllPendingTasks()
-        {
-            try
-            {
-                using (SqlConnection con = new SqlConnection(_strcon))
-                {
-                    if (con.State == ConnectionState.Closed)
-                    {
-                        con.Open();
-                    }
-                    using (SqlCommand cmd = new SqlCommand($"select TaskName from {_tableName} where FinishedAt='PENDING' ", con))
-                    {
-                        SqlDataReader dr = cmd.ExecuteReader();
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.WriteLine("Pending task/s");
-                        if (dr.HasRows)
-                        {
-                            while (dr.Read())
-                            {
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.WriteLine(dr["TaskName"].ToString());
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                App.Debugger("exception", "ERROR", "ToDoCLI", "ShowAllPendingTasks", ex.Message);
             }
         }
     }
